@@ -6,19 +6,6 @@ import org.testng.annotations.Test;
 public class LoginTests {
 
     @Test
-    public void negativeLoginTest() {
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://www.linkedin.com/");
-
-        LandingPage landingPage = new LandingPage(driver);
-        Assert.assertTrue(landingPage.isPageLoaded(), "Landing page is not loaded.");
-
-        landingPage.Login("a@b.c", "");
-        Assert.assertTrue(landingPage.isPageLoaded(), "Landing page is not loaded.");
-    }
-
-
-    @Test
     public void successfulLoginTest() {
         WebDriver driver = new ChromeDriver();
         driver.get("https://www.linkedin.com/");
@@ -33,5 +20,31 @@ public class LoginTests {
     }
 
     @Test
+    public void negativeLoginReturnedToLandingTest() {
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://www.linkedin.com/");
+
+        LandingPage landingPage = new LandingPage(driver);
+        Assert.assertTrue(landingPage.isPageLoaded(), "Landing page is not loaded.");
+
+        landingPage.Login("a@b.c", "");
+        Assert.assertTrue(landingPage.isPageLoaded(), "Landing page is not loaded.");
+    }
+
+    @Test
+    public void negativeLoginReturnedToLoginSubmitTest() {
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://www.linkedin.com/");
+
+        LandingPage landingPage = new LandingPage(driver);
+        Assert.assertTrue(landingPage.isPageLoaded(), "Landing page is not loaded.");
+
+        landingPage.Login("oksana_fluffy@mail.ru", "1111");
+        LoginSubmitPage loginSubmitPage = new LoginSubmitPage(driver);
+        Assert.assertTrue(loginSubmitPage.isPageLoaded(), "LoginSubmitPage is not loaded.");
+        Assert.assertEquals(loginSubmitPage.getPasswordValidationMessageText(), "Это неверный пароль. Повторите попытку или измените пароль.",
+                "Wrong validation message for password field.");
+
+    }
 
 }
