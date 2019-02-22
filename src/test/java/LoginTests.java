@@ -8,11 +8,13 @@ import org.testng.annotations.Test;
 
 public class LoginTests {
     WebDriver driver;
+    LandingPage landingPage;
 
     @BeforeMethod
     public void beforeMethod() {
         driver = new ChromeDriver();
         driver.get("https://www.linkedin.com/");
+        landingPage = new LandingPage(driver);
     }
 
     @AfterMethod
@@ -31,17 +33,14 @@ public class LoginTests {
 
     @Test(dataProvider = "validData")
     public void successfulLoginTest(String userEmail, String userPassword) {
-        LandingPage landingPage = new LandingPage(driver);
         Assert.assertTrue(landingPage.isPageLoaded(), "Landing page is not loaded.");
 
-        landingPage.Login(userEmail, userPassword);
-
-        HomePage homePage = new HomePage(driver);
+        HomePage homePage = landingPage.loginToHomePage(userEmail, userPassword);
         Assert.assertTrue(homePage.isPageLoaded(), "Home page did not load after login.");
     }
 
     @DataProvider
-    public Object[][] invalidData() {
+    public Object[][] wrongData() {
         return new Object[][]{
                 {"a@b.c", ""},
                 {"ab.c", ""},
@@ -49,18 +48,17 @@ public class LoginTests {
         };
     }
 
-    @Test(dataProvider = "invalidData")
+    @Test(dataProvider = "wrongData")
     public void negativeLoginReturnedToLandingTest(String userEmail, String userPassword) {
-        LandingPage landingPage = new LandingPage(driver);
         Assert.assertTrue(landingPage.isPageLoaded(), "Landing page is not loaded.");
 
-        landingPage.Login(userEmail, userPassword);
+        landingPage.loginToLandingPage(userEmail, userPassword);
 
         Assert.assertTrue(landingPage.isPageLoaded(), "Landing page is not loaded.");
     }
 
     @DataProvider
-    public Object[][] incorrectData() {
+    public Object[][] invalidData() {
         return new Object[][]{
                 {"oksana_fluffy@mail.ru", "1111", "", "Это неверный пароль. Повторите попытку или измените пароль."},
                 {"oksana_fluffy@mail", "sraka007", "Этот адрес эл. почты не зарегистрирован в LinkedIn. Повторите попытку.", ""},
@@ -68,52 +66,20 @@ public class LoginTests {
         };
     }
 
-    @Test(dataProvider = "incorrectData")
-    public void negativeLoginReturnedToLoginSubmitTest(String userEmail, String userPassword, String emailValidationMessage, String passwordValidationMessage) {
-        LandingPage landingPage = new LandingPage(driver);
+    @Test(dataProvider = "invalidData")
+    public void negativeLoginReturnedToLoginSubmitTest(String userEmail,
+                                                       String userPassword,
+                                                       String emailValidationMessage,
+                                                       String passwordValidationMessage) {
         Assert.assertTrue(landingPage.isPageLoaded(), "Landing page is not loaded.");
 
-        landingPage.Login(userEmail, userPassword);
-        LoginSubmitPage loginSubmitPage = new LoginSubmitPage(driver);
+        LoginSubmitPage loginSubmitPage = landingPage.loginToLoginSubmitPage(userEmail, userPassword);
         Assert.assertTrue(loginSubmitPage.isPageLoaded(), "LoginSubmitPage is not loaded.");
+
+        Assert.assertEquals(loginSubmitPage.getEmailValidationMessageText(), emailValidationMessage,
+                "Wrong validation message for email field.");
         Assert.assertEquals(loginSubmitPage.getPasswordValidationMessageText(), passwordValidationMessage,
                 "Wrong validation message for password field.");
-        Assert.assertEquals(loginSubmitPage.getEmailValidationMessageText(), emailValidationMessage,
-                "Wrong validation message for login field.");
-
-    }
-
-
-    @Test
-    public void negativeLoginIncorrectEmailEmptyPasswordTest() {
-        LandingPage landingPage = new LandingPage(driver);
-        Assert.assertTrue(landingPage.isPageLoaded(), "Landing page is not loaded.");
-
-        landingPage.Login("ab.c", "");
-        Assert.assertTrue(landingPage.isPageLoaded(), "Landing page is not loaded.");
-
-    }
-
-    @Test
-    public void negativeLoginEmptyLoginTest() {
-        LandingPage landingPage = new LandingPage(driver);
-        Assert.assertTrue(landingPage.isPageLoaded(), "Landing page is not loaded.");
-        landingPage.Login("", "1");
-        Assert.assertTrue(landingPage.isPageLoaded(), "Landing page is not loaded.");
-
-    }
-
-    @Test
-    public void negativeIncorrectLoginCorrectPasswordTest() {
-        LandingPage landingPage = new LandingPage(driver);
-        Assert.assertTrue(landingPage.isPageLoaded(), "Landing page is not loaded.");
-        landingPage.Login("oksana_fluffy@mail", "sraka007");
-
-        LoginSubmitPage loginSubmitPage = new LoginSubmitPage(driver);
-        Assert.assertTrue(loginSubmitPage.isPageLoaded(), "LoginSubmitPage is not loaded.");
-        Assert.assertEquals(loginSubmitPage.getEmailValidationMessageText(), "Этот адрес эл. почты не зарегистрирован в LinkedIn. Повторите попытку.",
-                "Wrong validation message for login field.");
-
     }
 
 }
