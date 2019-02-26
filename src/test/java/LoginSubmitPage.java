@@ -1,27 +1,28 @@
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class LoginSubmitPage {
     WebDriver driver;
+
+    @FindBy(xpath = "//form[@class='login__form']")
     WebElement loginForm;
+
+    @FindBy(xpath = "//div[@id='error-for-password']")
     WebElement passwordValidationMessage;
+
+    @FindBy(xpath = "//div[@id='error-for-username']")
     WebElement emailValidationMessage;
     
     public LoginSubmitPage(WebDriver driver){
         this.driver = driver;
-        initElements();
-    }
-
-    private void initElements() {
-        loginForm = driver.findElement(By.xpath("//form[@class='login__form']"));
-        passwordValidationMessage = driver.findElement(By.xpath("//div[@id='error-for-password']"));
-        emailValidationMessage = driver.findElement(By.xpath("//div[@id='error-for-username']"));
+        PageFactory.initElements(driver, this);
     }
 
     public boolean isPageLoaded() {
-        return loginForm.isDisplayed()
-                && driver.getCurrentUrl().contains("/login-submit")
+        return driver.getCurrentUrl().contains("/login-submit")
+                && loginForm.isDisplayed()
                 && driver.getTitle().contains("Войти в LinkedIn");
     }
 
