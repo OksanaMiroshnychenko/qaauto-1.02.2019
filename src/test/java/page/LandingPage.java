@@ -1,3 +1,5 @@
+package page;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -21,25 +23,18 @@ public class LandingPage {
         PageFactory.initElements(driver, this);
     }
 
-    public HomePage loginToHomePage(String userEmail, String userPassword) {
+    public <T> T login(String userEmail, String userPassword) {
         userEmailField.sendKeys(userEmail);
         userPasswordField.sendKeys(userPassword);
         signInButton.click();
-        return new HomePage(driver);
-    }
-
-    public LoginSubmitPage loginToLoginSubmitPage(String userEmail, String userPassword) {
-        userEmailField.sendKeys(userEmail);
-        userPasswordField.sendKeys(userPassword);
-        signInButton.click();
-        return new LoginSubmitPage(driver);
-    }
-
-    public LandingPage loginToLandingPage(String userEmail, String userPassword) {
-        userEmailField.sendKeys(userEmail);
-        userPasswordField.sendKeys(userPassword);
-        signInButton.click();
-        return new LandingPage(driver);
+        if (driver.getCurrentUrl().contains("/feed/")) {
+            return (T) new HomePage(driver);
+        }
+        if (driver.getCurrentUrl().contains("/login-submit")) {
+            return (T) new LoginSubmitPage(driver);
+        } else {
+            return (T) new LandingPage(driver);
+        }
     }
 
     public boolean isPageLoaded() {
