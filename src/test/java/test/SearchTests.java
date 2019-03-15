@@ -9,7 +9,7 @@ public class SearchTests extends BaseTest {
 
     @Test
     public void basicSearchTest() {
-        String userEmail = "oksana_fluffy@mail.ru";
+        String userEmail = "daemonic.k1tty@gmail.com";
         String userPassword = "sraka007";
         String searchTerm = "HR";
 

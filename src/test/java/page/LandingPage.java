@@ -21,6 +21,9 @@ public class LandingPage {
     @FindBy(xpath = "//input[@id='login-password']")
     private WebElement userPasswordField;
 
+    @FindBy(xpath = "//*[@class='link-forgot-password']")
+    private WebElement forgotPasswordLink;
+
     /**
      * Constructor for Landing Page.
      * @param driver - WebDriver instance from BaseTest.
@@ -54,4 +57,8 @@ public class LandingPage {
                 && driver.getTitle().equals("LinkedIn: Войти или зарегистрироваться");
     }
 
+    public RequestPasswordResetPage clickOnForgotPasswordLink() {
+        forgotPasswordLink.click();
+        return new RequestPasswordResetPage(driver);
+    }
 }

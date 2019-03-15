@@ -14,8 +14,8 @@ public class LoginTests extends BaseTest{
     @DataProvider
     public Object[][] validData() {
         return new Object[][]{
-                {"oksana_fluffy@mail.ru", "sraka007"},
-                //{"oksana_FLUFFY@mail.ru", "sraka007"},
+                {"daemonic.k1tty@gmail.com", "sraka007"},
+                //{"oksana_FLUFFY@mail.ru daemonic.K1TTY@gmail.com", "sraka007"},
                 //{" oksana_fluffy@mail.ru ", "sraka007"}
         };
     }
@@ -54,8 +54,8 @@ public class LoginTests extends BaseTest{
     @DataProvider
     public Object[][] invalidData() {
         return new Object[][]{
-                {"oksana_fluffy@mail.ru", "1111", "", "Это неверный пароль. Повторите попытку или измените пароль."},
-                //{"oksana_fluffy@mail", "sraka007", "Этот адрес эл. почты не зарегистрирован в LinkedIn. Повторите попытку.", ""},
+                {"daemonic.k1tty@gmail.com", "1111", "", "Это неверный пароль. Повторите попытку или измените пароль."},
+                //{"daemonic.k1tty@gmail", "sraka007", "Этот адрес эл. почты не зарегистрирован в LinkedIn. Повторите попытку.", ""},
                 //{"6666666", "sraka007", "Обязательно включите в номер значок «+» и код своей страны.", ""}
         };
     }

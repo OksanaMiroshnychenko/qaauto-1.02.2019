@@ -14,7 +14,7 @@ public class BaseTest {
     LandingPage landingPage;
 
     /**
-     * Runs before each test and performs necessary actions.
+     * Runs before each test and performs necessary actions (opens browser...).
      */
     @BeforeMethod
     public void beforeMethod() {
