@@ -6,6 +6,9 @@ import org.testng.annotations.Test;
 import page.HomePage;
 import page.LoginSubmitPage;
 
+/**
+ * Contains set of valid credentials for successful login scenario.
+ */
 public class LoginTests extends BaseTest{
 
     @DataProvider
@@ -17,6 +20,11 @@ public class LoginTests extends BaseTest{
         };
     }
 
+    /**
+     * @param userEmail - user email string for login
+     * @param userPassword - user password string for login
+     * Login with correct credentials to https://www.linkedin.com/, verify that HomePage is loaded.
+     */
     @Test(dataProvider = "validData")
     public void successfulLoginTest(String userEmail, String userPassword) {
         Assert.assertTrue(landingPage.isPageLoaded(), "Landing page is not loaded.");
@@ -52,6 +60,13 @@ public class LoginTests extends BaseTest{
         };
     }
 
+    /**
+     * Method checks login scenario with incorrect data.
+     * @param userEmail - user email string for login
+     * @param userPassword - user password string for login
+     * @param emailValidationMessage - user email validation message
+     * @param passwordValidationMessage - user password validation message
+     */
     @Test(dataProvider = "invalidData")
     public void negativeLoginReturnedToLoginSubmitTest(String userEmail,
                                                        String userPassword,
