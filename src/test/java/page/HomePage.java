@@ -8,6 +8,9 @@ import org.openqa.selenium.support.PageFactory;
 
 import static java.lang.Thread.sleep;
 
+/**
+ * Page Object class for Home page.
+ */
 public class HomePage {
     private WebDriver driver;
 
