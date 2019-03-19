@@ -33,6 +33,13 @@ public class LandingPage {
         PageFactory.initElements(driver, this);
     }
 
+    /**
+     * Method (generic type) that performs login to the site.
+     * @param userEmail - userEmail string for login
+     * @param userPassword - userPassword string for login
+     * @param <T> - Type of generic page
+     * @return - instance of the T-page
+     */
     public <T> T login(String userEmail, String userPassword) {
         userEmailField.sendKeys(userEmail);
         userPasswordField.sendKeys(userPassword);
@@ -57,6 +64,10 @@ public class LandingPage {
                 && driver.getTitle().equals("LinkedIn: Войти или зарегистрироваться");
     }
 
+    /**
+     * Method that click the forgotPassword link.
+     * @return - new instance of RequestPasswordReset Page class.
+     */
     public RequestPasswordResetPage clickOnForgotPasswordLink() {
         forgotPasswordLink.click();
         return new RequestPasswordResetPage(driver);

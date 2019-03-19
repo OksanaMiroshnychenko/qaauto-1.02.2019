@@ -2,8 +2,7 @@ package test;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import page.PasswordResetRequestSubmissionPage;
-import page.RequestPasswordResetPage;
+import page.*;
 
 public class ResetPasswordTests extends BaseTest {
 
@@ -12,10 +11,18 @@ public class ResetPasswordTests extends BaseTest {
         String userEmail = "daemonic.k1tty@gmail.com";
 
         RequestPasswordResetPage requestPasswordResetPage = landingPage.clickOnForgotPasswordLink();
-        Assert.assertTrue(requestPasswordResetPage.isLoaded(), "RequestPasswordReset page is not loaded.");
+        Assert.assertTrue(requestPasswordResetPage.isPageLoaded(), "RequestPasswordReset page is not loaded.");
 
-        requestPasswordResetPage.findAccount(userEmail);
-        //Assert.assertTrue(passwordResetRequestSubmissionPage.isLoaded(), "PasswordResetRequestSubmission page is not loaded.");
+        PasswordResetRequestSubmissionPage passwordResetRequestSubmissionPage = requestPasswordResetPage.findAccount(userEmail);
+        Assert.assertTrue(passwordResetRequestSubmissionPage.isPageLoaded(), "PasswordResetRequestSubmission page is not loaded.");
+
+        PasswordResetEmailCheckPage passwordResetEmailCheckPage =
+
+
+        //PasswordChangedPage passwordChangedPage =
+
+        //изменение пароля, проверка что страница загр.
+        //переход на домашнюю страницу
 
     }
 }

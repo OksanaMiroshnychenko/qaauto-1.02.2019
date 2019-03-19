@@ -1,11 +1,15 @@
 package page;
 
+import bsh.StringUtil;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import util.GMailService;
 
+/**
+ * Page Object class for RequestPasswordReset page.
+ */
 public class RequestPasswordResetPage {
     private WebDriver driver;
 
@@ -16,18 +20,31 @@ public class RequestPasswordResetPage {
     private WebElement findAccountButton;
 
 
+    /**
+     * Constructor for RequestPasswordReset Page.
+     * @param driver - WebDriver instance from BaseTest.
+     */
     public  RequestPasswordResetPage(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
 
-    public boolean isLoaded() {
+    /**
+     * Method that checks if page is loaded.
+     * @return true/false
+     */
+    public boolean isPageLoaded() {
         return findAccountButton.isDisplayed()
                 && driver.getCurrentUrl().contains("uas/request-password-reset")
                 && driver.getTitle().equals("Изменить пароль | LinkedIn");
     }
 
-    public void findAccount(String userEmail) {
+    /**
+     * Method verifies the account validity.
+     * @param userEmail - userEmail string
+     * @return - new instance of PasswordResetRequestSubmission page
+     */
+    public PasswordResetRequestSubmissionPage findAccount(String userEmail) {
         userEmailField.sendKeys(userEmail);
 
         String messageSubject = "данное сообщение содержит ссылку для изменения пароля";
@@ -41,8 +58,10 @@ public class RequestPasswordResetPage {
         String message = gMailService.waitMessage(messageSubject, messageTo, messageFrom, 180);
         System.out.println("Content: " + message);
 
-        String expectedUrl = "https://www.linkedin.com/e/";
-        boolean urlFound =expectedUrl.contains("https://www.linkedin.com/e/");
+        int link = message.indexOf("https://www.linkedin.com/e/");
+        //StringBuilder sb = StringUtil.borrowBuilder().append(start);
+
+        //text.replaceAll("&amp;", "&");
 
 
         //String resetPasswordUrl = null;
@@ -50,4 +69,6 @@ public class RequestPasswordResetPage {
 
 
     }
+
+
 }
