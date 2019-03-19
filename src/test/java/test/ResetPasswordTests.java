@@ -13,13 +13,16 @@ public class ResetPasswordTests extends BaseTest {
         RequestPasswordResetPage requestPasswordResetPage = landingPage.clickOnForgotPasswordLink();
         Assert.assertTrue(requestPasswordResetPage.isPageLoaded(), "RequestPasswordReset page is not loaded.");
 
-        PasswordResetRequestSubmissionPage passwordResetRequestSubmissionPage = requestPasswordResetPage.findAccount(userEmail);
-        Assert.assertTrue(passwordResetRequestSubmissionPage.isPageLoaded(), "PasswordResetRequestSubmission page is not loaded.");
+        RequestPasswordResetSubmitPage requestPasswordResetSubmitPage = requestPasswordResetPage.findAccount(userEmail);
+        Assert.assertTrue(requestPasswordResetSubmitPage.isPageLoaded(), "RequestPasswordResetSubmit page is not loaded.");
 
-       // PasswordResetEmailCheckPage passwordResetEmailCheckPage = passwordResetRequestSubmissionPage.followLink();
+        ChooseNewPasswordPage chooseNewPasswordPage = requestPasswordResetSubmitPage.navigateToLinkFromEmail();
+
+
+       // RequestPasswordResetSubmitPage passwordResetEmailCheckPage = passwordResetRequestSubmissionPage.followLink();
         //Assert.assertTrue(passwordResetEmailCheckPage.isPageLoaded(), "passwordResetEmailCheck page is not loaded.");
 
-       // PasswordResetRequestSubmissionPage passwordResetRequestSubmissionPage = passwordResetEmailCheckPage.changePassword
+       // ChooseNewPasswordPage passwordResetRequestSubmissionPage = passwordResetEmailCheckPage.changePassword
 
         //PasswordChangedPage passwordChangedPage =
 

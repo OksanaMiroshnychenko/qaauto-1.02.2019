@@ -8,8 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 /**
  * Page Object class for PasswordResetRequestSubmission Page.
  */
-public class PasswordResetRequestSubmissionPage {
-    private WebDriver driver;
+public class ChooseNewPasswordPage extends BasePage {
 
     @FindBy(xpath = "//input[@id='newPassword']")
     private WebElement newPasswordField;
@@ -24,7 +23,7 @@ public class PasswordResetRequestSubmissionPage {
      * Constructor for PasswordResetRequestSubmission Page.
      * @param driver - WebDriver instance from BaseTest.
      */
-    public PasswordResetRequestSubmissionPage(WebDriver driver) {
+    public ChooseNewPasswordPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }

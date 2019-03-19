@@ -1,6 +1,6 @@
 package page;
 
-import bsh.StringUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,8 +10,7 @@ import util.GMailService;
 /**
  * Page Object class for RequestPasswordReset page.
  */
-public class RequestPasswordResetPage {
-    private WebDriver driver;
+public class RequestPasswordResetPage extends BasePage {
 
     @FindBy(xpath = "//input[@id='username']")
     private WebElement userEmailField;
@@ -47,7 +46,7 @@ public class RequestPasswordResetPage {
      * @param userEmail - userEmail string
      * @return - new instance of PasswordResetRequestSubmission page
      */
-    public PasswordResetRequestSubmissionPage findAccount(String userEmail) {
+    public RequestPasswordResetSubmitPage findAccount(String userEmail) {
         userEmailField.sendKeys(userEmail);
 
         String messageSubject = "данное сообщение содержит ссылку для изменения пароля";
@@ -61,16 +60,10 @@ public class RequestPasswordResetPage {
         String message = gMailService.waitMessage(messageSubject, messageTo, messageFrom, 180);
         System.out.println("Content: " + message);
 
-        int link = message.indexOf("https://www.linkedin.com/e/");
-        //StringBuilder sb = StringUtil.borrowBuilder().append(start);
-
-        //text.replaceAll("&amp;", "&");
-
-
-        //String resetPasswordUrl = null;
+        resetPasswordUrl = StringUtils.substringBetween(message, "href=\"", "\" style=\"cursor:pointer;color:#008CC9;-webkit-text-size-adjust:100%;display:inline-block;text-decoration:none;-ms-text-size-adjust:100%;\">Изменить пароль");
+        resetPasswordUrl.replace("amp;", "");
         //driver.get(resetPasswordUrl);
-
-        return new PasswordResetRequestSubmissionPage(driver);
+        return new RequestPasswordResetSubmitPage(driver);
 
     }
 

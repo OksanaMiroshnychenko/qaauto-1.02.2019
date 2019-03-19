@@ -5,8 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class PasswordChangedPage {
-    private WebDriver driver;
+public class PasswordChangedPage extends BasePage {
 
     @FindBy(xpath = "//button[@id='reset-password-submit-button']")
     WebElement goToHomepageButton;

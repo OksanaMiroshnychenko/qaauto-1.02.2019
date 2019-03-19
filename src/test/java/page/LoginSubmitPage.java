@@ -8,8 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 /**
  * Page object class for Login submit page.
  */
-public class LoginSubmitPage {
-    WebDriver driver;
+public class LoginSubmitPage extends BasePage {
 
     @FindBy(xpath = "//form[@class='login__form']")
     WebElement loginForm;

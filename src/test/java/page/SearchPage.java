@@ -13,8 +13,7 @@ import java.util.List;
 /**
  * Page Object class for SearchPage.
  */
-public class SearchPage {
-    WebDriver driver;
+public class SearchPage extends BasePage {
 
     @FindBy(xpath = "//h3[contains(@class, 'search-results__total')]")
     private WebElement searchResultsTotal;
