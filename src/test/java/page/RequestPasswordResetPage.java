@@ -41,8 +41,12 @@ public class RequestPasswordResetPage {
         String message = gMailService.waitMessage(messageSubject, messageTo, messageFrom, 180);
         System.out.println("Content: " + message);
 
-        String resetPasswordUrl = null;
-        driver.get(resetPasswordUrl);
+        String expectedUrl = "https://www.linkedin.com/e/";
+        boolean urlFound =expectedUrl.contains("https://www.linkedin.com/e/");
+
+
+        //String resetPasswordUrl = null;
+        //driver.get(resetPasswordUrl);
 
 
     }
