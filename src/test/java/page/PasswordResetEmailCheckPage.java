@@ -13,6 +13,7 @@ public class PasswordResetEmailCheckPage {
 
     /**
      * Constructor for PasswordResetEmailCheck Page.
+     *
      * @param driver - WebDriver instance from BaseTest.
      */
     public PasswordResetEmailCheckPage(WebDriver driver) {
@@ -22,14 +23,18 @@ public class PasswordResetEmailCheckPage {
 
     /**
      * Method that checks if page is loaded.
+     *
      * @return true/false
      */
     public boolean isPageLoaded() {
-        return tryDifferentEmailButton.isDisplayed();
-         && driver.getCurrentUrl().contains("https://www.linkedin.com/checkpoint/rp/request-password-reset-submit")
+        return tryDifferentEmailButton.isDisplayed()
+                && driver.getCurrentUrl().contains("https://www.linkedin.com/checkpoint/rp/request-password-reset-submit")
                 && driver.getTitle().equals("Проверьте, получили ли вы сообщение эл. почты со ссылкой для изменения пароля. | LinkedIn");
     }
 
-    public PasswordResetRequestSubmissionPage followLink
 
+
+    public PasswordResetEmailCheckPage followLink() {
+        return new PasswordResetEmailCheckPage(driver);
+    }
 }

@@ -16,13 +16,13 @@ public class ResetPasswordTests extends BaseTest {
         PasswordResetRequestSubmissionPage passwordResetRequestSubmissionPage = requestPasswordResetPage.findAccount(userEmail);
         Assert.assertTrue(passwordResetRequestSubmissionPage.isPageLoaded(), "PasswordResetRequestSubmission page is not loaded.");
 
-        PasswordResetEmailCheckPage passwordResetEmailCheckPage =
+       // PasswordResetEmailCheckPage passwordResetEmailCheckPage = passwordResetRequestSubmissionPage.followLink();
+        //Assert.assertTrue(passwordResetEmailCheckPage.isPageLoaded(), "passwordResetEmailCheck page is not loaded.");
 
+       // PasswordResetRequestSubmissionPage passwordResetRequestSubmissionPage = passwordResetEmailCheckPage.changePassword
 
         //PasswordChangedPage passwordChangedPage =
 
-        //изменение пароля, проверка что страница загр.
-        //переход на домашнюю страницу
 
     }
 }

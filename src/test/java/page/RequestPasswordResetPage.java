@@ -22,15 +22,17 @@ public class RequestPasswordResetPage {
 
     /**
      * Constructor for RequestPasswordReset Page.
+     *
      * @param driver - WebDriver instance from BaseTest.
      */
-    public  RequestPasswordResetPage(WebDriver driver){
+    public RequestPasswordResetPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
 
     /**
      * Method that checks if page is loaded.
+     *
      * @return true/false
      */
     public boolean isPageLoaded() {
@@ -41,6 +43,7 @@ public class RequestPasswordResetPage {
 
     /**
      * Method verifies the account validity.
+     *
      * @param userEmail - userEmail string
      * @return - new instance of PasswordResetRequestSubmission page
      */
@@ -67,6 +70,7 @@ public class RequestPasswordResetPage {
         //String resetPasswordUrl = null;
         //driver.get(resetPasswordUrl);
 
+        return new PasswordResetRequestSubmissionPage(driver);
 
     }
 
