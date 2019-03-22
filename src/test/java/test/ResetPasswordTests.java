@@ -4,8 +4,14 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import page.*;
 
+/**
+ * Class that contains set of reset password tests.
+ */
 public class ResetPasswordTests extends BaseTest {
 
+    /**
+     * Verifies successful password reset functionality.
+     */
     @Test
     public void successfulPasswordResetTest() {
         String userEmail = "daemonic.k1tty@gmail.com";
@@ -17,15 +23,13 @@ public class ResetPasswordTests extends BaseTest {
         Assert.assertTrue(requestPasswordResetSubmitPage.isPageLoaded(), "RequestPasswordResetSubmit page is not loaded.");
 
         ChooseNewPasswordPage chooseNewPasswordPage = requestPasswordResetSubmitPage.navigateToLinkFromEmail();
+        Assert.assertTrue(chooseNewPasswordPage.isPageLoaded(), "ChooseNewPassword page is not loaded");
 
+        PasswordChangedPage passwordChangedPage = chooseNewPasswordPage.changePassword("sraka009", "sraka009");
+        Assert.assertTrue(passwordChangedPage.isPageLoaded(), "PasswordChanged page is not loaded");
 
-       // RequestPasswordResetSubmitPage passwordResetEmailCheckPage = passwordResetRequestSubmissionPage.followLink();
-        //Assert.assertTrue(passwordResetEmailCheckPage.isPageLoaded(), "passwordResetEmailCheck page is not loaded.");
-
-       // ChooseNewPasswordPage passwordResetRequestSubmissionPage = passwordResetEmailCheckPage.changePassword
-
-        //PasswordChangedPage passwordChangedPage =
-
+        HomePage homePage = passwordChangedPage.goToHomepage();
+        Assert.assertTrue(homePage.isPageLoaded(), "Home Page is not loaded");
 
     }
 }

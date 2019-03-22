@@ -5,8 +5,14 @@ import org.testng.annotations.Test;
 import page.HomePage;
 import page.SearchPage;
 
+/**
+ * Class that represents set of search tests.
+ */
 public class SearchTests extends BaseTest {
 
+    /**
+     * Verifies basic search functionality.
+     */
     @Test
     public void basicSearchTest() {
         String userEmail = "daemonic.k1tty@gmail.com";

@@ -35,7 +35,7 @@ public class LandingPage extends BasePage {
      * Method (generic type) that performs login to the site.
      * @param userEmail - userEmail string for login
      * @param userPassword - userPassword string for login
-     * @param <T> - Type of generic page
+     * @param <T> - Type of page
      * @return - instance of the T-page
      */
     public <T> T login(String userEmail, String userPassword) {

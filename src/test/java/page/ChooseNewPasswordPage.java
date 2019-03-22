@@ -42,7 +42,7 @@ public class ChooseNewPasswordPage extends BasePage {
      * Method that changes user password.
      * @param newPassword - new password string
      * @param confirmPassword - confirm password string
-     * @return - new instance of page class.
+     * @return - new instance of Home page class.
      */
     public PasswordChangedPage changePassword(String newPassword, String confirmPassword) {
         newPasswordField.sendKeys(newPassword);

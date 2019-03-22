@@ -14,7 +14,7 @@ public class BaseTest {
     LandingPage landingPage;
 
     /**
-     * Runs before each test and performs necessary actions (opens browser...).
+     * Runs before each test and performs necessary actions (initializes ChromeDriver, goes to linkedin.com page, initializes new instance of landingPage).
      */
     @BeforeMethod
     public void beforeMethod() {
@@ -24,7 +24,7 @@ public class BaseTest {
     }
 
     /**
-     * Runs after each test and closes browser.
+     * Runs after each test and closes browser, quits driver.
      */
     @AfterMethod
     public void afterMethod() {
