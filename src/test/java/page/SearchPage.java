@@ -28,6 +28,7 @@ public class SearchPage extends BasePage {
     public SearchPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
+        waitUntilElementIsClickable(searchResultsTotal);
     }
 
     /**

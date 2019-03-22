@@ -16,7 +16,7 @@ public class SearchTests extends BaseTest {
     @Test
     public void basicSearchTest() {
         String userEmail = "daemonic.k1tty@gmail.com";
-        String userPassword = "sraka007";
+        String userPassword = "sraka008";
         String searchTerm = "HR";
 
         Assert.assertTrue(landingPage.isPageLoaded(), "Landing page is not loaded.");
